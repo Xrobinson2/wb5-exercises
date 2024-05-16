@@ -1,5 +1,9 @@
 "use strict";
 
+
+
+
+
 const toyCategoryDropdown = document.getElementById("toyCategoryDropdown");
 const toyList = document.getElementById("toyList");
 const toyManufacturer = document.getElementById("toyManufacturer");
@@ -7,11 +11,18 @@ const toyAge = document.getElementById("toyAge");
 const toyDetailRow = document.getElementById("toyDetailRow");
 const toyName = document.getElementById("toyName");
 
+
+
+
+
 window.onload = () => {
   console.log("onload");
   toyCategoryDropdown.onchange = onToyCategoryDropdownChange;
   toyList.onchange = onToyListChange;
 };
+
+
+
 
 function onToyCategoryDropdownChange() {
   console.log("onToyCategoryDropdownChange");
@@ -33,14 +44,15 @@ function onToyCategoryDropdownChange() {
   let toysInCategory = getToysForCategoryCode(selectedCategory);
   console.log(toysInCategory);
 
-  toysInCategory.forEach(addToyNameToToyList);
+  toysInCategory.forEach(addToyToToyList)
 
+ 
 }
 
-function addToyNameToToyList(toy) {
+function addToyToToyList(toy) {
   let newOption = document.createElement("option");
-  newOption.value = toy.name;
-  newOption.innerHTML = toy.name;
+  newOption.value = toy.toyName;
+  newOption.innerHTML = toy.toyName;
   toyList.appendChild(newOption);
 }
 
@@ -61,8 +73,11 @@ function getToyByname(toyName) {
   let selectedCategory = toyCategoryDropdown.value;
   let toys = getToysForCategoryCode(selectedCategory);
 
-  return toys.find((toy) => x.name == toyName);
+  for (let toy of toys) {
+    if (toy.name == toyName) return toy;
+  }
 }
+
 function onToyListChange() {
   console.log("onToyListChange");
 
@@ -75,7 +90,7 @@ function onToyListChange() {
 
   //show detail row
 
-  showDetailRow();
+showDetailRow()
 
   //set detail row elemetns to represent this toy
   toyName.innerHTML = selectedToy.name;
@@ -85,11 +100,12 @@ function onToyListChange() {
 
 function showDetailRow() {
   toyDetailRow.style.display = "block";
+
 }
 
-function hideDetailRow() {
-  toyDetailRow.style.display = "none";
-  toyName.innerHTML = "";
-  toyManufacturer.innerHTML = "";
-  toyAge.innerHTML = "";
-}
+function hideDetailRow(){
+    toyDetailRow.style.display = "none"
+    toyName.innerHTML = ""
+    toyManufacturer.innerHTML = ""
+    toyAge.innerHTML = ""
+  }
